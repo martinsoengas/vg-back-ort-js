@@ -3,8 +3,6 @@ import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 
-import fillTables from './helpers/fillTables.js';
-
 // Router Imports
 import videogamesRouter from './routes/videogames.routes.js';
 import developersRouter from './routes/developers.routes.js';
@@ -24,7 +22,7 @@ app.use('/developers', developersRouter);
 app.use('/ratings', ratingsRouter);
 app.use('/users', usersRouter);
 
-app.use('/', async (req, res) => {
+app.use('/', async (_req, res) => {
   res.status(200).send({
     system: 'Videogames API',
     status: '🟢 System operational',
@@ -34,7 +32,6 @@ app.use('/', async (req, res) => {
 
 // Server
 await connection.sync({ force: false });
-// await fillTables();
 
 const port = process.env.PORT || 3000;
 app.listen(port, '0.0.0.0', () => {

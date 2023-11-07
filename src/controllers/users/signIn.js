@@ -14,10 +14,10 @@ export const signIn = async (req, res) => {
       return res.send(JSON.stringify({ failed: 'Wrong email or password' }));
     }
 
-    // const isValidPassword = await bcrypt.compare(password, user.password);
-    // if (!isValidPassword) {
-    //   return res.send({ failed: 'Wrong email or password' });
-    // }
+    const isValidPassword = await bcrypt.compare(password, user.password);
+    if (!isValidPassword) {
+      return res.send({ failed: 'Wrong email or password' });
+    }
 
     const token = await tokenGenerator(email);
 
